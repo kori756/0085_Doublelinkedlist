@@ -79,4 +79,5 @@ public:
         current->next = newNode;            //  Step 9d
     }
 
-   
+    void hapus()
+    
