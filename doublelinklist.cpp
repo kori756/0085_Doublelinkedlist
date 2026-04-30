@@ -80,4 +80,103 @@ public:
     }
 
     void hapus()
+    {
+        if (START == NULL)
+        {
+            cout << "\nList is empty" << endl;
+            return;
+        }
+        cout << "\nEnter the roll Number of the student whose record is to be deleted: ";
+        int rollNo;
+        cin >> rollNo;
+
+        Node *current = START;
+
+        //  Step 1: Traverse the list to find th enode
+        while (current != NULL && current->noMhs != rollNo)
+            current = current->next;
+        if (current == NULL)
+        {
+            cout << "Record not found" << endl;
+            return;
+        }
+
+        // Step 2: If node is at the beginning
+        if (current == START)
+        {
+            START = current->next;     //   Step 2a
+            if (START != NULL)
+            {
+                START->prev = NULL;     //  Step 2b
+            }
+            
+        }
+        else
+        {
+            // Step 3: link previous node to next of current
+            current->prev->next = current->next;
+
+            // Step 4: if current is not the last node
+            if (current->next != NULL)
+                current->next->prev = current->prev;
+        }
+
+        // Step 5
+        delete current;
+        cout << "Record with roll number " << rollNo << " deleted" << endl;
+    }
+
+    void traverse()
+    {
+        if (START == NULL)
+        {
+            cout << "\nList is empty" << endl;
+            return;
+        }
+
+        // Step 1: Mark first node as currentNode
+        Node *currentNode = START;
+
+        // Step 2: Repeat until currentNode == NULL
+        cout << "\nRecords in ascending order of roll number are:\n";
+        int i = 0;
+        while (currentNode != NULL)
+        {
+            cout << i + 1 << ". " << currentNode->noMhs << " " << endl;
+            
+            // Step 3: Move to next node
+            currentNode = currentNode->next;
+            i++;
+        } 
+    }
+
+    void revtraverse()
+    {
+        if (START == NULL)
+        {
+            cout << "\nList is empty" << endl;
+            return;
+        }
+
+        // Step 1: Move to last node
+        Node *currentNode = START;
+        int i = 0;
+        while (currentNode->next != NULL)
+        {
+            currentNode = currentNode->next;
+            i++;
+        }
+
+        // Step 2: Traverse backward
+        cout << "\nRecords in descending order of roll number are:\n";
+        while (currentNode != NULL)
+        {
+            cout << i + 1 << ". " << currentNode->noMhs << " " << endl;
+
+            // Step 3: Move to previous node
+            currentNode = currentNode->prev;
+            i--;
+        }
+    }
+
     
