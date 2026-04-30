@@ -43,4 +43,7 @@ public:
             // Step 4 : newNode.next = START;
             newNode->next = START;
 
+            // Step 5 : START.prev = newNode (if START exicts)
+            if (START != NULL)
+                START->prev = newNode;
             
